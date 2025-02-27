@@ -23,8 +23,8 @@ public:
 		first_ = new Node(e, nullptr);
 	}
 
-	Node* getfirst() {
-		return first_;
+	T getfirst() {
+		return first_->value_;
 	}
 
 	T pop() {
