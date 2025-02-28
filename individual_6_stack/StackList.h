@@ -38,7 +38,7 @@ public:
 	}
 
 	bool isEmpty() {
-		return (first_) ? true : false;
+		return (first_) ? false : true;
 	}
 };
 

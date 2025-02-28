@@ -21,17 +21,15 @@ int main() {
 		std::cout << stak.pop() << '\n';
 		std::cout << stak.pop() << '\n';
 		std::cout << stak.pop() << '\n';
-		std::cout << stak.isEmpty() << '\n';
 	}
 	catch (StackUnderflow error) {
 		std::cerr << error.what() << '\n';
 	}
-
+	std::cout << "---------------" << '\n';
 	try {
-		std::cout << "---------------" << '\n';
-		char str[15]{};
+		char str[10]{};
 		getPostfixFromInfix("3+4*2/(1-5)", str);
-		std::cout << str << "    end" << '\n';
+		std::cout << str << '\n';
 	}
 	catch (std::string error) {
 		std::cout << error << '\n';
@@ -63,7 +61,7 @@ void getPostfixFromInfix(const char* infix, char* postfix) {
 			continue;
 		}
 		if (isOperator(infix[c])) {
-			while (stak.isEmpty() && getOperatorPrecedence(stak.getfirst()) >= getOperatorPrecedence(infix[c])) {
+			while (!stak.isEmpty() && getOperatorPrecedence(stak.getfirst()) >= getOperatorPrecedence(infix[c])) {
 				postfix[p] = stak.pop();
 				p++;
 			}
@@ -71,7 +69,7 @@ void getPostfixFromInfix(const char* infix, char* postfix) {
 			continue;
 		}
 	}
-	while (stak.isEmpty()) {
+	while (!stak.isEmpty()) {
 		if (isOperator(stak.getfirst())) {
 			postfix[p] = stak.pop();
 			p++;
@@ -128,7 +126,7 @@ bool isValidInfix(const char* infix) {
 		}
 
 		else if (current == ')') {
-			if (!stak.isEmpty() || stak.getfirst() != '(') {
+			if (stak.isEmpty() || stak.getfirst() != '(') {
 				return false;
 			}
 			stak.pop();
@@ -136,5 +134,5 @@ bool isValidInfix(const char* infix) {
 			c_operator = 0;
 		}
 	}
-	return !stak.isEmpty();
+	return stak.isEmpty();
 }
