@@ -28,7 +28,7 @@ public:
 	}
 
 	T pop() {
-		if (!first_)
+		if (!first_) 
 			throw StackUnderflow::StackUnderflow();
 		T value = first_->value_;
 		Node* first = first_;
